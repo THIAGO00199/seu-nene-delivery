@@ -39,21 +39,3 @@ footer{width:min(1180px,92vw);margin:0 auto 30px;border-top:1px solid var(--line
 @media(max-width:920px){.hero{grid-template-columns:1fr;padding:42px;min-height:auto}.hero-visual{height:300px}.grid{grid-template-columns:repeat(2,1fr)}.menu-head{align-items:stretch;flex-direction:column}.search{width:100%}.store-card{align-items:flex-start}}
 @media(max-width:640px){.preview-bar span:last-child{display:none}.topbar{height:68px;padding:0 4vw}.brand small{display:none}.brand-mark{width:38px;height:38px}.ghost-btn{display:none}.cart-trigger span{display:none}.cart-trigger{padding:8px}.hero{margin-top:14px;border-radius:25px;padding:31px 24px 22px}.hero h1{font-size:49px}.hero-copy>p:not(.eyebrow){font-size:15px;margin:18px 0}.hero-visual{height:250px}.plate{width:225px;height:225px}.pizza-art{width:184px;height:184px}.pep{width:21px;height:21px}.pep-1{left:35px;top:37px}.pep-2{left:81px;top:27px}.pep-3{right:32px;top:53px}.pep-4{left:52px;top:83px}.pep-5{right:49px;top:94px}.pep-6{left:30px;bottom:40px}.pep-7{right:36px;bottom:30px}.pep-8{left:82px;bottom:22px}.pep-9{left:99px;top:68px}.pep-10{right:69px;bottom:59px}.hero-stamp{width:88px;height:88px;right:5px;bottom:2px}.store-card{padding:16px;border-radius:21px}.store-logo{width:58px;height:58px;border-radius:18px}.store-title h2{font-size:24px}.facts{gap:14px}.facts div{min-width:42%}.menu-head h2{font-size:36px}.grid{grid-template-columns:1fr}.product-card{display:grid;grid-template-columns:118px 1fr}.product-art{height:100%;min-height:160px}.product-art>span{font-size:50px}.product-art>b{font-size:7px;left:7px;top:7px}.heart{right:7px;top:7px;width:31px;height:31px}.product-body{padding:15px}.product-body>p{-webkit-line-clamp:2}.product-foot{align-items:center}.product-foot button{font-size:12px;padding:8px}.footer-right{display:none}.modal{padding:24px;border-radius:23px}.modal-art{margin:-24px -24px 21px}.drawer{padding:19px}.footer-brand .brand-mark{display:grid}}
 @media(max-width:380px){.hero-actions{display:grid}.hero-actions>*{width:100%}.product-card{grid-template-columns:100px 1fr}.product-foot{align-items:flex-start;flex-direction:column}.product-foot button{width:100%}.facts div{min-width:100%}}
-
-
-/* Production polish */
-.minimum-note{background:#fff3df;border:1px solid #efd2a7;border-radius:12px;padding:10px 12px;margin:2px 0;color:#7b4c1c!important}
-.minimum-note b{color:#7b4c1c!important}
-.summary-actions{display:grid!important;grid-template-columns:1fr 1fr;gap:8px!important;margin-top:2px}
-.summary-actions button,.summary-actions a{min-height:42px;border:1px solid var(--line);background:#fff;color:#6f2a22;border-radius:12px;font-weight:800;display:flex;align-items:center;justify-content:center;text-align:center;padding:9px 10px}
-.summary-actions button:hover,.summary-actions a:hover{background:#f7eee8;border-color:#d9c9bd}
-.summary-actions button:disabled{opacity:.45;cursor:not-allowed}
-.info-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:18px}
-.info-actions .add-big{margin:0;justify-content:center;text-align:center}
-.secondary-link{border:1px solid var(--line);background:white;color:#6f2a22;border-radius:15px;padding:15px 18px;font-weight:900;display:flex;align-items:center;justify-content:center}
-.secondary-link:hover{background:#f7eee8}
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:150;background:#211714;color:#fff8ed;border-radius:999px;padding:12px 18px;font-size:13px;font-weight:800;box-shadow:0 14px 42px rgba(25,10,7,.28);animation:toast-in .2s ease}
-@keyframes toast-in{from{opacity:0;transform:translate(-50%,10px)}}
-button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid rgba(168,50,39,.28);outline-offset:3px}
-@media(max-width:640px){.info-actions{grid-template-columns:1fr}.summary-actions{grid-template-columns:1fr}.toast{bottom:14px;width:max-content;max-width:90vw;text-align:center}}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
