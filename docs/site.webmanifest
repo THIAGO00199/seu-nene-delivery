@@ -1,0 +1,9 @@
+{
+  "name": "Seu Nenê · Cardápio e pedidos",
+  "short_name": "Seu Nenê",
+  "description": "Cardápio digital demonstrativo do Restaurante e Pizzaria Seu Nenê.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f3ee",
+  "theme_color": "#20120f"
+}
