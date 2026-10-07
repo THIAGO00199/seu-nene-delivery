@@ -3,6 +3,7 @@ export const STORE = {
   fullName: 'Restaurante e Pizzaria Seu Nenê',
   phone: '(43) 3432-5222',
   phoneHref: 'tel:+554334325222',
+  mapsHref: 'https://www.google.com/maps/search/?api=1&query=Av.%20Dr.%20Get%C3%BAlio%20Vargas%2C%20619%2C%20Jandaia%20do%20Sul%2C%20PR',
   address: 'Av. Dr. Getúlio Vargas, 619 · Centro · Jandaia do Sul, PR',
   rating: '4,6',
   delivery: '60–90 min',
