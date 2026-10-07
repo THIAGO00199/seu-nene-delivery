@@ -56,6 +56,7 @@ export default function App(){
   const [mode,setMode] = useState(()=>storage.get('seu-nene-mode','Entrega'))
   const [infoOpen,setInfoOpen] = useState(false)
   const [successOpen,setSuccessOpen] = useState(false)
+  const [toast,setToast] = useState('')
 
   useEffect(()=>storage.set('seu-nene-favorites',favorites),[favorites])
   useEffect(()=>storage.set('seu-nene-cart',cart),[cart])
@@ -91,6 +92,38 @@ export default function App(){
 
   function changeQty(key,delta){
     setCart(current=>current.map(item=>item.key===key?{...item,qty:item.qty+delta}:item).filter(item=>item.qty>0))
+  }
+
+  function showToast(message){
+    setToast(message)
+    window.clearTimeout(showToast._timer)
+    showToast._timer=window.setTimeout(()=>setToast(''),2400)
+  }
+
+  async function copyOrder(){
+    if(!cart.length) return
+    const lines=cart.map(item=>`${item.qty}x ${item.name} · ${item.size} · ${money(item.price*item.qty)}`)
+    const text=[
+      'Pedido demonstrativo · Seu Nenê',
+      `Modo: ${mode}`,
+      '',
+      ...lines,
+      '',
+      `Total estimado: ${money(total)}`,
+      'Valores e disponibilidade sujeitos à confirmação da loja.'
+    ].join('\n')
+    try{
+      await navigator.clipboard.writeText(text)
+      showToast('Resumo do pedido copiado.')
+    }catch{
+      const area=document.createElement('textarea')
+      area.value=text
+      document.body.appendChild(area)
+      area.select()
+      document.execCommand('copy')
+      area.remove()
+      showToast('Resumo do pedido copiado.')
+    }
   }
 
   function finishDemo(){
@@ -216,6 +249,7 @@ export default function App(){
       </div>
       <div className="footer-right">
         <a href={STORE.phoneHref}>{STORE.phone}</a>
+        <a href={STORE.mapsHref} target="_blank" rel="noreferrer">Ver no mapa</a>
         <button className="ghost-btn" onClick={()=>setInfoOpen(true)}>Sobre esta prévia</button>
       </div>
     </footer>
@@ -229,6 +263,7 @@ export default function App(){
       onClose={()=>setDrawer(false)}
       onQty={changeQty}
       onFinish={finishDemo}
+      onCopy={copyOrder}
     />
 
     {selected&&<ProductModal product={selected} onClose={()=>setSelected(null)} onAdd={addItem}/>}
@@ -243,7 +278,10 @@ export default function App(){
         <div><span>Entrega estimada</span><b>{STORE.delivery}</b></div>
         <div><span>Pedido mínimo de entrega</span><b>{money(STORE.minimum)}</b></div>
       </div>
-      <a className="add-big" href={STORE.phoneHref} style={{marginTop:18,justifyContent:'center'}}>Ligar para a loja</a>
+      <div className="info-actions">
+        <a className="add-big" href={STORE.phoneHref}>Ligar para a loja</a>
+        <a className="secondary-link" href={STORE.mapsHref} target="_blank" rel="noreferrer">Abrir no mapa</a>
+      </div>
     </ModalShell>}
 
     {ordersOpen&&<ModalShell onClose={()=>setOrdersOpen(false)}>
@@ -257,6 +295,8 @@ export default function App(){
         </div>):<div className="empty compact"><h3>Nenhum pedido salvo.</h3><p>Monte um pedido para testar a experiência.</p></div>}
       </div>
     </ModalShell>}
+
+    {toast&&<div className="toast" role="status">{toast}</div>}
 
     {successOpen&&<ModalShell onClose={()=>setSuccessOpen(false)} className="success-modal">
       <div className="success">✓</div>
