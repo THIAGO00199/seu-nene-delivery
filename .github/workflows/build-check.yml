@@ -18,4 +18,7 @@ jobs:
         with:
           node-version: 22
       - run: npm install
-      - run: npm run build
+      - name: Esbuild isolation check
+        run: npx esbuild src/main.jsx --bundle --outfile=/tmp/seu-nene.js --loader:.jsx=jsx --platform=browser
+      - name: Vite production build
+        run: timeout 60s npm run build
