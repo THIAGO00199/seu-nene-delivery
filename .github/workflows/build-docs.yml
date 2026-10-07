@@ -1,0 +1,45 @@
+name: Build site into docs
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'docs/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build production site
+        run: npm run build
+
+      - name: Disable Jekyll
+        run: touch docs/.nojekyll
+
+      - name: Commit compiled site to main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f docs
+          if git diff --cached --quiet; then
+            echo "No compiled changes."
+            exit 0
+          fi
+          git commit -m "build: update GitHub Pages docs [skip ci]"
+          git push origin main
