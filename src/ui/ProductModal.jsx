@@ -1,5 +1,6 @@
 import React,{useMemo,useState} from 'react'
 import {PRODUCTS} from '../data'
+import {getProductImage} from '../foodImages'
 
 const money=n=>n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})
 
@@ -14,17 +15,38 @@ export default function ProductModal({product,onClose,onAdd}){
   const label=secondProduct?product.name+' + '+secondProduct.name:product.name
 
   return <div className="modal-wrap" onMouseDown={e=>e.target===e.currentTarget&&onClose()}>
-    <section className="modal">
+    <section className="modal product-modal">
       <button className="modal-close" onClick={onClose}>×</button>
-      <div className="modal-art">{isPizza?'🍕':product.category==='Calzones'?'🥟':'🍽️'}</div>
-      <p className="eyebrow">{product.category}</p>
-      <h2>{product.name}</h2>
-      <p>{product.description}</p>
-      <div className="option-head"><div><strong>Escolha o tamanho</strong><span>Obrigatório</span></div></div>
-      <select value={size} onChange={e=>{setSize(e.target.value);setSecond('')}}>{sizes.map(s=><option key={s}>{s} · {money(product.sizes[s])}</option>)}</select>
-      {isPizza&&<><div className="option-head"><div><strong>Quer meio a meio?</strong><span>Opcional · usa o maior valor</span></div></div>
-      <select value={second} onChange={e=>setSecond(e.target.value)}><option value="">Um sabor só</option>{choices.map(x=><option value={x.id} key={x.id}>{x.name} · {money(x.sizes[size])}</option>)}</select></>}
-      <button className="add-big" onClick={()=>onAdd({key:[product.id,size,second].join('|'),name:label,size,price})}>Adicionar ao pedido <strong>{money(price)}</strong></button>
+
+      <div className="modal-art modal-art-photo">
+        <img src={getProductImage(product)} alt={product.name+', imagem ilustrativa'}/>
+        <span>Imagem ilustrativa</span>
+      </div>
+
+      <div className="modal-content">
+        <p className="eyebrow">{product.category}</p>
+        <h2>{product.name}</h2>
+        <p>{product.description}</p>
+
+        <div className="option-head"><div><strong>Escolha o tamanho</strong><span>Obrigatório</span></div></div>
+        <div className="size-grid">
+          {sizes.map(s=><button key={s} className={size===s?'active':''} onClick={()=>{setSize(s);setSecond('')}}>
+            <span>{s}</span><strong>{money(product.sizes[s])}</strong>
+          </button>)}
+        </div>
+
+        {isPizza&&<>
+          <div className="option-head"><div><strong>Quer meio a meio?</strong><span>Opcional · usa o maior valor</span></div></div>
+          <select value={second} onChange={e=>setSecond(e.target.value)}>
+            <option value="">Um sabor só</option>
+            {choices.map(x=><option value={x.id} key={x.id}>{x.name} · {money(x.sizes[size])}</option>)}
+          </select>
+        </>}
+
+        <button className="add-big" onClick={()=>onAdd({key:[product.id,size,second].join('|'),name:label,size,price})}>
+          <span>Adicionar ao pedido</span><strong>{money(price)}</strong>
+        </button>
+      </div>
     </section>
   </div>
 }
