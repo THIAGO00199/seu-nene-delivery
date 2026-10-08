@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
+import './photo-theme.css'
 
 const pizzas = [
   ['Seu nenê',48.9,'Molho de tomate, muçarela, frango desfiado, catupiry, palmito, calabresa e orégano','DA CASA'],
