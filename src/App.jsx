@@ -3,6 +3,7 @@ import {CATEGORIES, PRODUCTS, STORE} from './data'
 import ProductCard from './ui/ProductCard'
 import ProductModal from './ui/ProductModal'
 import CartDrawer from './ui/CartDrawer'
+import {HERO_IMAGE} from './foodImages'
 
 const money = value => value.toLocaleString('pt-BR', {style:'currency', currency:'BRL'})
 const storage = {
@@ -164,19 +165,37 @@ export default function App(){
     <main>
       <section className="hero" id="inicio">
         <div className="hero-copy">
-          <p className="eyebrow">O SEU PRÓXIMO BOM MOMENTO</p>
+          <p className="eyebrow">RESTAURANTE & PIZZARIA · JANDAIA DO SUL</p>
           <h1>Seu Nenê.<br/><em>Na sua mesa.</em></h1>
-          <p>Pizzas, porções e o sabor de se sentir em casa. Feito para compartilhar.</p>
+          <p>Pizzas, porções, refeições e aquele pedido que transforma uma noite comum em um bom momento.</p>
+
           <div className="hero-actions">
-            <a className="primary-btn" href="#cardapio">Ver cardápio</a>
+            <a className="primary-btn" href="#cardapio">Explorar cardápio <span>→</span></a>
             <button className="secondary-btn" onClick={()=>setInfoOpen(true)}>Informações da loja</button>
           </div>
-        </div>
-        <div className="hero-visual" aria-hidden="true">
-          <div className="plate">
-            <div className="pizza-art">{Array.from({length:10}).map((_,i)=><i key={i} className={'pep pep-'+(i+1)}/>)}</div>
+
+          <div className="hero-points">
+            <div><strong>★ {STORE.rating}</strong><span>Avaliação pública</span></div>
+            <div><strong>{STORE.delivery}</strong><span>Entrega estimada</span></div>
+            <div><strong>68 itens</strong><span>7 categorias</span></div>
           </div>
-          <div className="hero-stamp"><small>JANDAIA DO SUL</small><b>SEU NENÊ</b><small>RESTAURANTE & PIZZARIA</small></div>
+        </div>
+
+        <div className="hero-visual">
+          <div className="hero-photo">
+            <img src={HERO_IMAGE} alt="Pizza servida em uma mesa, imagem ilustrativa"/>
+            <span className="photo-note hero-photo-note">Imagem ilustrativa</span>
+          </div>
+
+          <div className="hero-review-card" aria-hidden="true">
+            <span>MAIS ESCOLHA</span>
+            <strong>29 sabores</strong>
+            <small>só nas pizzas salgadas</small>
+          </div>
+
+          <div className="hero-stamp" aria-hidden="true">
+            <small>JANDAIA DO SUL</small><b>Nê</b><small>RESTAURANTE & PIZZARIA</small>
+          </div>
         </div>
       </section>
 
